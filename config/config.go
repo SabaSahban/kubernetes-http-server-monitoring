@@ -6,9 +6,9 @@ import (
 
 type (
 	Config struct {
-		Server Server `mapstructure:"server"`
-		Redis  Redis  `mapstructure:"redis"`
-		Ninjas Ninjas `mapstructure:"ninjas"`
+		Server        Server `mapstructure:"server"`
+		Redis         Redis  `mapstructure:"redis"`
+		CheckInterval int    `mapstructure:"interval"`
 	}
 
 	Redis struct {
@@ -19,10 +19,6 @@ type (
 
 	Server struct {
 		Port int `mapstructure:"port"`
-	}
-
-	Ninjas struct {
-		ApiKey string `mapstructure:"api-key"`
 	}
 )
 

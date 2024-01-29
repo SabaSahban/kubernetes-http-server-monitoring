@@ -6,5 +6,4 @@ redis:
   password: ""
   timeout: 5
 
-ninjas:
-  api-key: "TCE1qE8fln9hw3myCDkynQ==rsMUsLsDPdcWBh4f"
+interval: 60

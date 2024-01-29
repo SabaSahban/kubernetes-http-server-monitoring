@@ -3,6 +3,7 @@ package cmd
 import (
 	"cloud-final/config"
 	"cloud-final/handler"
+	"cloud-final/healthcheck"
 	"cloud-final/storage"
 	"errors"
 	"fmt"
@@ -23,13 +24,17 @@ func Execute() {
 	// create redis client
 	rc := storage.New(cfg)
 
-	weatherHandler := handler.WeatherHandler{
-		RedisClient:  rc,
-		NinjasConfig: cfg.Ninjas,
+	serverHandler := handler.ServerHandler{
+		RedisClient: rc,
 	}
 
+	go healthcheck.StartHealthCheck(rc, cfg.CheckInterval)
+
 	e := echo.New()
-	e.GET("/weather/:city", weatherHandler.WeatherInfo)
+	e.POST("/api/server", serverHandler.AddServer)
+	e.GET("/api/server", serverHandler.GetServerStatus)
+	e.GET("/api/server/all", serverHandler.GetAllServersStatus)
+
 	port := cfg.Server.Port
 	serverAddress := fmt.Sprintf(":%d", port)
 	if err := e.Start(serverAddress); !errors.Is(err, http.ErrServerClosed) {
