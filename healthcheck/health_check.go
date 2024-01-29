@@ -10,7 +10,7 @@ import (
 )
 
 func StartHealthCheck(storageClient *storage.Storage, interval int) {
-	ticker := time.NewTicker(time.Duration(interval) * time.Minute)
+	ticker := time.NewTicker(time.Duration(interval) * time.Second)
 	for {
 		select {
 		case <-ticker.C:
@@ -28,7 +28,6 @@ func checkServersHealth(storageClient *storage.Storage) {
 
 	for _, server := range servers {
 		checkServer(&server)
-		// Update the server status in Redis
 		err := storageClient.UpdateServer(server)
 		if err != nil {
 			logrus.Errorf("Failed to update server %s: %v", server.ID, err)

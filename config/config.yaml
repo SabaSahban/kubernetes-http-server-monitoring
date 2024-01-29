@@ -2,8 +2,8 @@ server:
   port: 8080
 
 redis:
-  host: "redis:6379"
+  host: "localhost:6379"
   password: ""
   timeout: 5
 
-interval: 60
+interval: 2

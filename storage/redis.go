@@ -99,6 +99,18 @@ func (s *Storage) GetAllServers() ([]ServerData, error) {
 	return servers, nil
 }
 
+func (s *Storage) UpdateServer(data ServerData) error {
+	ctx := context.Background()
+	key := fmt.Sprintf("server:%s", data.ID)
+
+	jsonData, err := json.Marshal(data)
+	if err != nil {
+		return err
+	}
+
+	return s.redisClient.Set(ctx, key, jsonData, 0).Err()
+}
+
 func (s *Storage) Ping(ctx context.Context) error {
 	return s.redisClient.Ping(ctx).Err()
 }
