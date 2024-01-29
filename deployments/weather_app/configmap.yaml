@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: weather-config
+data:
+  config.yaml: |+
+    server:
+      port: 8080
+
+    redis:
+      host: "redis-service:6379"
+      password: ""
+      timeout: 300
+
+    ninjas:
+      api-key: "TCE1qE8fln9hw3myCDkynQ==rsMUsLsDPdcWBh4f"

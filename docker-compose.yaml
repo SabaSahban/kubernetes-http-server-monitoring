@@ -1,0 +1,27 @@
+version: '3.9'
+
+services:
+  weather:
+    build: .
+    ports:
+      - 8080:8080
+    volumes:
+      - ./config:/app/config
+    depends_on:
+      - redis
+    networks:
+      - my_network
+  redis:
+    image: redis
+    volumes:
+      - redis:/data
+    networks:
+      - my_network
+
+volumes:
+  redis:
+    driver: local
+
+networks:
+  my_network:
+    driver: bridge

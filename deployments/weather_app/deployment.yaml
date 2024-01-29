@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: weather
+  labels:
+    app: weather
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: weather
+  template:
+    metadata:
+      labels:
+        app: weather
+    spec:
+      containers:
+        - name: weather
+          image: sabasahban/weather:v1.1.0
+          imagePullPolicy: always
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+          - name: config-volume
+            mountPath: /app/config
+      volumes:
+        - name: config-volume
+          configMap:
+            name: weather-config
+            items:
+            - key: config.yaml
+              path: config.yaml
