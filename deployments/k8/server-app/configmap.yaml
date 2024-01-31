@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: server-app-config
+data:
+  config.yaml: |+
+    api:
+      server:
+        port: 8070
+
+      redis:
+        host: "redis:6379"
+        password: ""
+        timeout: 5
+
+      interval: 2

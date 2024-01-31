@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8070
 
 redis:
   host: "redis:6379"
@@ -7,3 +7,4 @@ redis:
   timeout: 5
 
 interval: 2
+
