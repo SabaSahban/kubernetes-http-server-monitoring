@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: server-app
+  labels:
+    app: server-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: server-app
+  template:
+    metadata:
+      labels:
+        app: server-app
+    spec:
+      containers:
+        - name: server-app
+          image: sabasahban/server-app:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8070
+          volumeMounts:
+          - name: config-volume
+            mountPath: /app/config
+          env:
+          - name: REDIS_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: my-redis
+                key: redis-password
+      volumes:
+        - name: config-volume
+          configMap:
+            name: server-app-config
+            items:
+            - key: config.yaml
+              path: config.yaml

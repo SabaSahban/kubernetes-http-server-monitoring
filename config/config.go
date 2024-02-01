@@ -38,5 +38,8 @@ func Load() (*Config, error) {
 		return &Config{}, err
 	}
 
+	viper.AutomaticEnv()
+	conf.Redis.Password = viper.GetString("REDIS_PASSWORD")
+
 	return &conf, nil
 }

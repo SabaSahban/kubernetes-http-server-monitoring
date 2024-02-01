@@ -6,11 +6,12 @@ COPY go.sum go.sum
 RUN go mod download
 COPY ./ ./
 
-RUN go build -o weather_app
+RUN go build -o server_app
 
 FROM alpine:latest
 
 WORKDIR /app
-COPY --from=builder /app/weather_app .
+COPY --from=builder /app/server_app .
 
-ENTRYPOINT ["./weather_app"]
+EXPOSE 8070
+ENTRYPOINT ["./server_app"]

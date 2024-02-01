@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ printf "%s-api-config" (include "server-app.fullname" .) }}
+  labels:
+    app.kubernetes.io/name: {{ printf "%s-api" (include "server-app.name" .) }}
+    {{- include "server-app.labels" . | nindent 4 }}
+data:
+  config.yaml: |+
+    server:
+      port: {{ .Values.service.port }}
+    redis:
+      host: {{ printf "%s-redis-master:%.0f" (include "server-app.fullname" .) .Values.redis.master.service.ports.redis }}
+      timeout: {{ .Values.redis.master.service.timeout.redis }}
+    interval: {{ .Values.interval }}
