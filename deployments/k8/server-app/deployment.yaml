@@ -27,7 +27,7 @@ spec:
           - name: REDIS_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: server-redis
+                name: my-redis
                 key: redis-password
       volumes:
         - name: config-volume

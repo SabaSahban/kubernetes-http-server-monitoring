@@ -13,4 +13,5 @@ FROM alpine:latest
 WORKDIR /app
 COPY --from=builder /app/server_app .
 
+EXPOSE 8070
 ENTRYPOINT ["./server_app"]
