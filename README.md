@@ -1,4 +1,4 @@
-# Kubernetes System Monitoring with Helm and Autoscaling
+# Kubernetes HTTP server Monitoring with Helm and Autoscaling
 
 This project implements a system monitoring tool using Docker and Kubernetes to track the health of web servers. The application allows users to add and monitor web servers via API endpoints, and stores server statuses in a database. Horizontal Pod Autoscaling (HPA) is configured for automatic scaling, while liveness, readiness, and startup probes ensure the application’s health.
 
